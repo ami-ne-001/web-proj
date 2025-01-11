@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/logo.jpg" type="image/x-icon">
+    <title>AL GARAGE</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Add FontAwesome for cart icon -->
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Cart Page Styles */
+#cart-section {
+    padding: 20px;
+    background: #cbcbcbf0;
+}
+
+.cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.cart-header i {
+    font-size: 30px;
+    color: rgb(110, 65, 36);
+    margin-right: 10px;
+}
+
+.cart-header h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.cart-item h4 {
+    font-size: 16px;
+    margin: 0;
+}
+
+#back-button {
+    background: rgb(66, 44, 29);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+}
+
+    </style>
+</head>
+<body>
+    <section id="cart-section">
+        <div class="container">
+            <div class="cart-header">
+                <i class="fa fa-shopping-cart"></i>
+                <h2>Your Cart</h2>
+            </div>
+            <div id="cart-items">
+                <!-- Dynamically populated cart items will appear here -->
+            </div>
+            <button id="back-button">Go Back</button>
+        </div>
+    </section>
+
+    <script>
+        // Get the cart items from localStorage and populate the cart
+        const cartItemsContainer = document.getElementById('cart-items');
+        const backButton = document.getElementById('back-button');
+
+        // Retrieve cart items from localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Display cart items
+        cartItems.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h4>${item.name}</h4>
+                    <p>Added to your cart</p>
+                </div>
+            `;
+            cartItemsContainer.appendChild(cartItem);
+        });
+
+        // Handle the back button to go to the previous page
+        backButton.addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body>
+</html>
